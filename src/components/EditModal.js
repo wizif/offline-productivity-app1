@@ -27,6 +27,7 @@ export const EditModal = ({visible, title, value, onSave, onCancel, multiline = 
             onChangeText={setText}
             multiline={multiline}
             autoFocus
+            placeholderTextColor={colors.light}
           />
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
@@ -47,14 +48,16 @@ export const EditModal = ({visible, title, value, onSave, onCancel, multiline = 
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.85)',
     justifyContent: 'center',
     padding: 20,
   },
   content: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.darkCard,
     borderRadius: 16,
     padding: 20,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   title: {
     fontSize: 20,
@@ -65,10 +68,12 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: colors.border,
+    backgroundColor: colors.dark,
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
     marginBottom: 20,
+    color: colors.text,
   },
   inputMultiline: {
     minHeight: 100,
@@ -82,9 +87,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 14,
     borderRadius: 8,
-    backgroundColor: colors.light,
+    backgroundColor: colors.dark,
     marginRight: 10,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   saveButton: {
     flex: 1,

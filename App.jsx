@@ -14,23 +14,24 @@ function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={{
-          headerShown: false,
-          tabBarActiveTintColor: colors.primary,
-          tabBarInactiveTintColor: colors.gray,
-          tabBarStyle: {
-            height: 60,
-            paddingBottom: 8,
-            paddingTop: 8,
-            borderTopWidth: 1,
-            borderTopColor: colors.border,
-            backgroundColor: colors.white,
-          },
-          tabBarLabelStyle: {
-            fontSize: 12,
-            fontWeight: '600',
-          },
-        }}>
+       screenOptions={{
+  headerShown: false,
+  tabBarActiveTintColor: '#3B82F6',  // Blue when active
+  tabBarInactiveTintColor: '#64748B',  // Gray when inactive
+  tabBarStyle: {
+    height: 65,
+    paddingBottom: 10,
+    paddingTop: 10,
+    backgroundColor: '#0A0E27',  // Dark background
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(59, 130, 246, 0.2)',  // Subtle blue border
+  },
+  tabBarLabelStyle: {
+    fontSize: 11,
+    fontWeight: '600',
+  },
+}}>
+
         <Tab.Screen
           name="Tasks"
           component={TodoScreen}

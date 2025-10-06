@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
   Alert,
+  StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {TodoItem} from '../components/TodoItem';
@@ -26,8 +27,10 @@ export const TodoScreen = () => {
   }, []);
 
   useEffect(() => {
-    saveTodos();
-    updateAnalytics();
+    if (todos.length > 0) {
+      saveTodos();
+      updateAnalytics();
+    }
   }, [todos]);
 
   const loadTodos = async () => {
@@ -105,19 +108,29 @@ export const TodoScreen = () => {
 
   const filteredTodos = getFilteredTodos();
   const activeCount = todos.filter(t => !t.completed).length;
+  const completedCount = todos.filter(t => t.completed).length;
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.dark} />
       <View style={styles.header}>
-        <Text style={styles.headerText}>Tasks</Text>
-        <Text style={styles.subText}>{activeCount} active tasks</Text>
+        <View>
+          <Text style={styles.headerText}>Tasks</Text>
+          <Text style={styles.subText}>
+            {activeCount} active · {completedCount} completed
+          </Text>
+        </View>
+        <View style={styles.statsBox}>
+          <Text style={styles.statsNumber}>{todos.length}</Text>
+          <Text style={styles.statsLabel}>Total</Text>
+        </View>
       </View>
 
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
           placeholder="Add a new task..."
-          placeholderTextColor={colors.gray}
+          placeholderTextColor={colors.light}
           value={inputText}
           onChangeText={setInputText}
           onSubmitEditing={addTodo}
@@ -158,8 +171,9 @@ export const TodoScreen = () => {
         contentContainerStyle={styles.list}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Icon name="check-circle-outline" size={64} color={colors.light} />
+            <Icon name="check-circle-outline" size={64} color={colors.darkLight} />
             <Text style={styles.emptyText}>No tasks here</Text>
+            <Text style={styles.emptySubtext}>Tap + to add your first task</Text>
           </View>
         }
       />
@@ -180,32 +194,60 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  header: {
-    backgroundColor: colors.primary,
+   header: {
+    backgroundColor: '#0A0E27',
     padding: 20,
     paddingTop: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(59, 130, 246, 0.2)',  // Blue border
   },
   headerText: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 32,
+    fontWeight: '800',
     color: colors.white,
+    letterSpacing: -0.5,
   },
   subText: {
     fontSize: 14,
-    color: colors.white,
-    opacity: 0.9,
-    marginTop: 4,
+    color: colors.textLight,
+    marginTop: 6,
   },
+  statsBox: {
+    backgroundColor: 'rgba(59, 130, 246, 0.15)',  // Subtle blue bg
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(59, 130, 246, 0.3)',
+  },
+  statsNumber: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#3B82F6',  // Blue number
+  },
+  statsLabel: {
+    fontSize: 11,
+    color: colors.textLight,
+    marginTop: 2,
+  },
+
   inputContainer: {
     flexDirection: 'row',
     padding: 16,
-    backgroundColor: colors.white,
+    backgroundColor: colors.darkCard,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
   input: {
     flex: 1,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 8,
+    backgroundColor: colors.dark,
+    borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     fontSize: 16,
@@ -219,11 +261,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: colors.primary,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
   filterContainer: {
     flexDirection: 'row',
     padding: 16,
-    backgroundColor: colors.white,
+    backgroundColor: colors.darkCard,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
@@ -232,10 +279,13 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     marginRight: 8,
-    backgroundColor: colors.light,
+    backgroundColor: colors.dark,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   filterActive: {
     backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   filterText: {
     fontSize: 14,
@@ -253,8 +303,14 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   emptyText: {
-    fontSize: 16,
-    color: colors.gray,
+    fontSize: 18,
+    color: colors.textLight,
     marginTop: 16,
+    fontWeight: '600',
+  },
+  emptySubtext: {
+    fontSize: 14,
+    color: colors.light,
+    marginTop: 8,
   },
 });

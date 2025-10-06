@@ -23,7 +23,10 @@ export const TodoItem = ({item, onToggle, onDelete, onEdit}) => {
             {item.text}
           </Text>
           <Text style={styles.date}>
-            {new Date(item.createdAt).toLocaleDateString()}
+            {new Date(item.createdAt).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+            })}
           </Text>
         </View>
       </TouchableOpacity>
@@ -40,15 +43,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: colors.cardBg,
-    borderRadius: 12,
+    borderRadius: 14,
     padding: 16,
     marginBottom: 12,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(59, 130, 246, 0.15)',
   },
   content: {
     flex: 1,
@@ -58,15 +58,15 @@ const styles = StyleSheet.create({
   checkbox: {
     width: 28,
     height: 28,
-    borderRadius: 14,
+    borderRadius: 8,  // Rounded square instead of circle
     borderWidth: 2,
-    borderColor: colors.primary,
-    marginRight: 12,
+    borderColor: '#3B82F6',
+    marginRight: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },
   checkboxChecked: {
-    backgroundColor: colors.primary,
+    backgroundColor: '#3B82F6',
   },
   textContainer: {
     flex: 1,
@@ -74,17 +74,23 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: colors.text,
-    marginBottom: 4,
+    marginBottom: 6,
+    lineHeight: 22,
+    fontWeight: '500',
   },
   textCompleted: {
     textDecorationLine: 'line-through',
-    color: colors.gray,
+    color: colors.textMuted,
+    opacity: 0.5,
   },
   date: {
     fontSize: 12,
-    color: colors.textLight,
+    color: colors.textMuted,
   },
   deleteButton: {
     padding: 8,
+    marginLeft: 8,
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    borderRadius: 8,
   },
 });
