@@ -61,12 +61,12 @@ export const AnalyticsScreen = () => {
   const weeklyAvg = getWeeklyAverage();
 
   const chartConfig = {
-    backgroundColor: colors.white,
-    backgroundGradientFrom: colors.white,
-    backgroundGradientTo: colors.white,
+    backgroundColor: colors.cardBg,
+    backgroundGradientFrom: colors.cardBg,
+    backgroundGradientTo: colors.cardBg,
     decimalPlaces: 0,
-    color: (opacity = 1) => `rgba(108, 92, 231, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(45, 52, 54, ${opacity})`,
+    color: (opacity = 1) => `rgba(59, 130, 246, ${opacity})`,
+    labelColor: (opacity = 1) => colors.textLight,
     style: {borderRadius: 16},
     propsForDots: {
       r: '6',
@@ -119,9 +119,9 @@ export const AnalyticsScreen = () => {
           <LineChart
             data={{
               labels: weekData.days,
-              datasets: [{data: weekData.completedData}],
+              datasets: [{data: weekData.completedData.length > 0 ? weekData.completedData : [0]}],
             }}
-            width={screenWidth - 32}
+            width={screenWidth - 64}
             height={220}
             chartConfig={chartConfig}
             bezier
@@ -134,13 +134,13 @@ export const AnalyticsScreen = () => {
           <BarChart
             data={{
               labels: weekData.days,
-              datasets: [{data: weekData.totalData}],
+              datasets: [{data: weekData.totalData.length > 0 ? weekData.totalData : [0]}],
             }}
-            width={screenWidth - 32}
+            width={screenWidth - 64}
             height={220}
             chartConfig={{
               ...chartConfig,
-              color: (opacity = 1) => `rgba(162, 155, 254, ${opacity})`,
+              color: (opacity = 1) => `rgba(139, 92, 246, ${opacity})`,
             }}
             style={styles.chart}
             showValuesOnTopOfBars
@@ -148,9 +148,7 @@ export const AnalyticsScreen = () => {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            Keep up the great work! 🎉
-          </Text>
+          <Text style={styles.footerText}>Keep up the great work! 🎉</Text>
         </View>
       </ScrollView>
     </View>
@@ -163,19 +161,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   header: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.dark,
     padding: 20,
     paddingTop: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(59, 130, 246, 0.2)',
   },
   headerText: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 32,
+    fontWeight: '800',
     color: colors.white,
+    letterSpacing: -0.5,
   },
   subText: {
     fontSize: 14,
-    color: colors.white,
-    opacity: 0.9,
+    color: colors.textLight,
     marginTop: 4,
   },
   content: {
@@ -189,15 +189,12 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   chartContainer: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.cardBg,
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   chart: {
     borderRadius: 16,

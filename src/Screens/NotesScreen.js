@@ -229,9 +229,9 @@ const styles = StyleSheet.create({
     color: colors.textLight,
     marginTop: 8,
   },
-  modalContainer: {
+   modalContainer: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.dark,  // Changed from colors.white
   },
   modalHeader: {
     flexDirection: 'row',
@@ -240,6 +240,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
+    backgroundColor: colors.darkCard,
   },
   modalTitle: {
     fontSize: 18,
@@ -251,13 +252,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 16,
     color: colors.text,
+    backgroundColor: colors.darkCard,
   },
   contentInput: {
     flex: 1,
     fontSize: 16,
     padding: 16,
-    paddingTop: 0,
+    paddingTop: 8,
     color: colors.text,
     lineHeight: 24,
+    backgroundColor: colors.dark,
   },
+
 });

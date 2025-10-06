@@ -131,36 +131,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  header: {
-    backgroundColor: colors.primary,
+   header: {
+    backgroundColor: colors.dark,  // Changed from colors.primary
     padding: 20,
     paddingTop: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(59, 130, 246, 0.2)',
   },
   headerText: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 32,
+    fontWeight: '800',
     color: colors.white,
-  },
-  subText: {
-    fontSize: 14,
-    color: colors.white,
-    opacity: 0.9,
-    marginTop: 4,
-  },
-  content: {
-    padding: 16,
+    letterSpacing: -0.5,
   },
   dayCard: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.cardBg,  // Changed from colors.white
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
+
   dayHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
